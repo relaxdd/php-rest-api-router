@@ -6,10 +6,10 @@
 ```php
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(.+)$ index.php?q=$1 [L,QSA]
+    RewriteRule ^(.+)$ index.php$1 [L,QSA]
 ```
 
 ## For Nginx add in config
 ```php
-    try_files $uri $uri/ /index.php?q=$args;
+    try_files $uri $uri/ /index.php$args;
 ```
