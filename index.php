@@ -9,12 +9,11 @@ use Relaxdd\RestApi\Request;
 use Relaxdd\RestApi\Service;
 
 $request = new Request([
-        'GET' => $_GET,
-        'POST' => $_POST,
-        'FILES' => $_FILES,
-        'SERVER' => $_SERVER
-    ]
-);
+  'GET' => $_GET,
+  'POST' => $_POST,
+  'FILES' => $_FILES,
+  'SERVER' => $_SERVER
+]);
 
 
 $service = new Service($request);
