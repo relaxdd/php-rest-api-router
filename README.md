@@ -6,7 +6,7 @@
 ```php
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(.+)$ index.php$1 [L,QSA]
+    RewriteRule ^(.+)$ index.php?$1 [L,QSA]
 ```
 
 ## For Nginx add in config
