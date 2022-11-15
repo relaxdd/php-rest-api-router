@@ -1,6 +1,7 @@
 <?php
 
 namespace Relaxdd\RestApi;
+
 // в идеале смотреть реализации PSR
 class Request {
   private array $get;

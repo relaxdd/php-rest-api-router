@@ -26,25 +26,22 @@ class Service {
     $this->controllers[$slug] = new $controller();
   }
 
-  /**
-   * @throws JsonException
-   */
   public function run(): void {
     $controller = $this->getController();
 
     if ($this->method !== 'GET') {
       Utils::Response('Requests with this method are not supported', 501);
     } else {
-      $data = $this->urlData['query'];
+      $body = $this->urlData['data'];
 
-      if (empty($data)) {
+      if (empty($body))
         $data = $controller->getAll();
-      }
-
-      $data = isset($data['arguments']) ?
-        $controller->{$data['method']}(...$data['arguments'])
-        : $controller->{$data['method']}();
-
+      else if (count($body) === 1)
+        $data = $controller->getItem($body[0]);
+      else if (count($body) === 2)
+        $data = $controller->getItemField($body[0], $body[1]);
+      else
+        $data = null;
 
       Utils::Response(
         'Request completed successfully',
@@ -57,7 +54,8 @@ class Service {
   /**
    * @throws JsonException
    */
-  private function getController(): ControllerInterface {
+  private
+  function getController(): ControllerInterface {
     $router = $this->urlData['controller'];
 
     if (empty($router)) {
